@@ -30,11 +30,31 @@ auto rl_custom( const char* text, int start, int end ) {
 	rl_attempted_completion_over = 1;
 
 	// Returns NULL if they are no matches
-	char** values = rl_completion_matches( text, best_guesses );
+	return rl_completion_matches( text, best_guesses );
+}
 
-	return values;
+int print_custom(int count, int key) {
+	rl_attempted_completion_over = 1;
+	cout << "count: " << count << endl;
+	cout << "key: " << key << endl; 
+
+	return key;
 }
 
 int main( int argc, char** argv ) {
+	// rl_completion_entry_function = best_guesses;
+	// rl_bind_key('\t', rl_custom);
 	rl_attempted_completion_function = rl_custom;
+
+	char* buf;
+	while((buf = readline(">> "))!= nullptr ) {
+		if(strlen(buf) > 0) {
+			add_history( buf );
+		}
+
+		cout << buf << endl;
+
+		free(buf);
+	}
+	return 0;
 }
