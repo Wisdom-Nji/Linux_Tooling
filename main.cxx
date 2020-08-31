@@ -7,7 +7,7 @@
 using namespace std;
 
 
-auto rl_custom( auto input ) {
+int rl_custom( int input1, int input2 ) {
 }
 
 int main( int argc, char** argv ) {
