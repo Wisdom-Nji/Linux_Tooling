@@ -7,11 +7,12 @@
 
 using namespace std;
 
-auto best_guesses( const char* text, int state_counter ) {
+char* best_guesses( const char* text, int state_counter ) {
 	cout << "state counter: " << state_counter << endl;
 
 	vector<string> options = { "sherlock", "spike", "shrek", "shit" };
 
+	/*
 	char* matches[options.size()];
 	for( int i=0;i<options.size();++i) {
 		// matches[i] = options[i].c_str();
@@ -19,6 +20,8 @@ auto best_guesses( const char* text, int state_counter ) {
 	}
 
 	return matches;
+	*/
+	return strdup("spike");
 }
 
 
@@ -27,7 +30,9 @@ auto rl_custom( const char* text, int start, int end ) {
 	rl_attempted_completion_over = 1;
 
 	// Returns NULL if they are no matches
-	rl_completion_matches( text, best_guesses );
+	char** values = rl_completion_matches( text, best_guesses );
+
+	return values;
 }
 
 int main( int argc, char** argv ) {
